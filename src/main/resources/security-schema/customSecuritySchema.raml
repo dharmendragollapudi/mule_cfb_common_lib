@@ -1,0 +1,16 @@
+#%RAML 1.0 SecuritySchema
+
+type: x-oauth-custom
+description: Oauth Token Based Security
+describedBy:
+  headers:
+    client_id:
+      description: Client Id in base 64 format
+    client_secret:
+      description: Client Secret in base 64 format
+  
+  responses:
+    401:
+      description: "401-Unauthorized access"
+    500:
+        description: Bad response from authorization server,or WSDL SOAP Fault error  

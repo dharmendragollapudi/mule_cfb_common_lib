@@ -1,0 +1,57 @@
+#%RAML 1.0
+title: apitype-apiname
+version: 1.0
+baseUri: https://{envPrefix}-apitype-apiname.ms.sandbox.cfb.com/api/
+baseUriParameters:
+    envPrefix:
+      default: "dev" 
+      enum: ["dev","qa","uat","stg"]  
+documentation: 
+  - title: Mule 4.0 CrossFirst Bank API template 
+    content: | 
+        welcome to CrossFirst Bank API Led Approach template documentation
+mediaType: application/json
+protocols: [HTTPS]
+
+securitySchemes:
+  customSecurity: !include security-schema/customSecuritySchema.raml
+
+securedBy:
+  - customSecurity
+# All list of library files used  
+uses:
+  bankResType: libraries/banking-resource-type.raml
+  custType: libraries/customer-data-library.raml
+/accounts:
+  type: {bankResType.collection: {exampleReference1: !include examples/accounts.json, exampleReference2: !include examples/accounts.json,exampleReference3: !include examples/accountResp.json}}
+  get:
+    description: fetch account on the basis of customerId
+    queryParameters:
+      customerId:
+        type: string
+        example: "21122121"
+        required: true
+  post: 
+  /{accountId}:
+    type: {bankResType.collection: {exampleReference1: !include examples/accounts.json}}
+    get:
+    
+    /balances:
+      type: {bankResType.collection: {exampleReference1: !include examples/balances.json}}
+      get:
+    
+    /transactions:
+      type: {bankResType.collection: {exampleReference1: !include examples/transactions.json}}
+      get:
+    
+      /{transactionId}:
+        type: {bankResType.collection: {exampleReference1: !include examples/transactions.json}}
+        get:
+
+/customers:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: custType.customerType[] 

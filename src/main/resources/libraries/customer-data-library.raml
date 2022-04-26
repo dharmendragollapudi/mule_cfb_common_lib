@@ -1,0 +1,49 @@
+#%RAML 1.0 Library
+
+
+types:
+  customerType:
+    properties:
+      firstName:
+        type: string
+        required: true
+      lastName:
+        type: string
+        required: true
+      age:
+        type: integer
+        required: true
+      address: Address[]
+      phone: Phone[]
+  
+
+  Address:
+    properties:
+      street:
+        type: string
+        required: true        
+      city:
+        type: string
+        required: true
+      state:
+        type: string
+        required: true
+      country:
+        type: string
+        required: true
+      postalCode:
+        type: string
+        required: true
+      addressType: 
+        enum:
+          - Home
+          - Office
+
+  Phone:
+    properties:
+      phoneNumber:
+        type: string
+        required: true
+      phoneType:
+        enum: [Mobile, Home]
+          

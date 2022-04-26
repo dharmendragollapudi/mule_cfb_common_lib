@@ -1,0 +1,27 @@
+{
+  "configs": [
+    "common-config-global.xml",
+    "common-self-ping.xml",
+    "global-error-handler.xml"    
+    
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "mule_cfb_common_lib",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedResources": [
+         "common-config-global.xml",
+	    "common-self-ping.xml",
+	    "global-error-handler.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

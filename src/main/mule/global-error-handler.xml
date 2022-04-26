@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<error-handler name="global-error-handler" doc:id="dbad3d79-4069-4835-af0f-2ad807276b0c" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="390b2983-7707-494a-9216-0d6fecf0bdae" type="APIKIT:BAD_REQUEST">
+			<set-variable value="#[400]" doc:name="Set the HTTP Status - 400" doc:id="bb8a578e-3bd3-4c09-a707-4798b2cd6bfc" variableName="httpStatus"/>
+			<set-variable value="The method specified in the request is not allowed for theis resource" doc:name="Set Error Message" doc:id="73d7dfc1-aeda-453d-a56b-f62ab349344c" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="97627f53-dd2c-4f7e-bd69-0490615993d6" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="a657fa73-6c8e-46e1-be57-d6d278121fdd" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }
+]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f96255e1-2753-490c-a65b-628dc1f3e9b0" type="APIKIT:METHOD_NOT_ALLOWED">
+			<set-variable value="#[405]" doc:name="Set the HTTP Status - 405" doc:id="b79bb5e2-068a-45fa-b64c-6940be4c46da" variableName="httpStatus"/>
+			<set-variable value="The method specified in the request is not allowed for theis resource" doc:name="Set Error Message" doc:id="04109665-f672-490e-ae86-23ad1122d703" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="25db0c4e-98aa-4e63-a71f-aebc17bde22f" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="69dd854c-e213-475c-8020-b8eef6114106" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="33ddb3fe-62d5-4f90-8c42-ea2c74301274" type="APIKIT:NOT_ACCEPTABLE">
+			<set-variable value="#[406]" doc:name="Set the HTTP Status - 406" doc:id="2003ed38-caa7-48f6-b034-ee4822c71b92" variableName="httpStatus"/>
+			<set-variable value="The resouce identified by the request is not capable of generating response entities according to the request accept headers" doc:name="Set Error Message" doc:id="4c30a498-0368-4700-931c-729804912b10" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="77a66f34-22c8-4730-9cbd-59b71a89f2d1" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="f2c6935b-1e73-4776-aa77-93354d96ed86" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2f95f92e-5b35-45f1-9a12-45077e6f4d82" type="APIKIT:NOT_FOUND">
+			<set-variable value="#[404]" doc:name="Set the HTTP Status - 404" doc:id="19c6e730-48d9-4540-89b2-090971843e18" variableName="httpStatus"/>
+			<set-variable value="The server has not found anything matching the Request-URI" doc:name="Set Error Message" doc:id="60946d55-8de2-46c1-8ac5-01e2cf739115" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="e77cec81-aae1-475a-b045-e79020bdab49" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="8ed12736-2e12-45bb-80d8-eddfbfb02da4" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f21151da-2fdb-415a-aeb8-f8339626abd5" type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+			<set-variable value="#[415]" doc:name="Set the HTTP Status - 415" doc:id="6c470068-6aa2-45d8-8cbb-0d832f262764" variableName="httpStatus"/>
+			<set-variable value="The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method" doc:name="Set Error Message" doc:id="422a7c5d-adf4-4513-b540-d6d95304b6c2" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="9fc7efaa-b84e-40fd-bab3-3dc5c23d878d" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="55e4b93e-5952-41b1-b446-d100a0fbde03" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2ba4cea2-7bb0-4eb2-81bf-20bf2fc05fb3" type="HTTP:CLIENT_SECURITY">
+			<set-variable value="#[401]" doc:name="Set the HTTP Status - 401" doc:id="2d3a8935-fecd-4f69-b6bf-76d5cfa9ac24" variableName="httpStatus"/>
+			<set-variable value="Upstream service did not authorize the request" doc:name="Set Error Message" doc:id="cce2d2f6-3ad6-400f-8978-5df4927559b9" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="2e2c2e8b-8e52-4ec1-8fde-bb551b9a9887" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="22f17303-6247-4162-8031-d944f06d58e8" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="efef97d0-3174-482b-baff-66b67087155c" type="HTTP:FORBIDDEN">
+			<set-variable value="#[403]" doc:name="Set the HTTP Status - 403" doc:id="dc858bb6-5c8b-4052-8ab1-6eed78f49ed6" variableName="httpStatus"/>
+			<set-variable value="Access to the upstream service is forbidden" doc:name="Set Error Message" doc:id="fbac0fb7-390b-491c-b8fd-6f09b1726347" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="f34d8004-7668-4df6-b959-a4658eb99568" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="8c03610a-5a1a-43b2-b342-596665049076" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="aaa54c45-5803-412b-8bc5-23cf06ef11bc" type="HTTP:CONNECTIVITY">
+			<set-variable value="#[503]" doc:name="Set the HTTP Status - 503" doc:id="5e4d1d16-0bb5-489d-95b2-a52c04227509" variableName="httpStatus"/>
+			<set-variable value="http connectivity error" doc:name="Set Error Message" doc:id="86b5d2ad-f55f-4820-b6a4-91d8d839eca0" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="68f6b45a-0d91-45a5-98b1-3d30608ae187" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="d8165110-c385-4f7c-b83b-8804371ccd29" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="3852875f-73c2-48e7-b460-efdaea0fdb5a" type="HTTP:INTERNAL_SERVER_ERROR">
+			<set-variable value="#[500]" doc:name="Set the HTTP Status - 500" doc:id="473d276e-07f5-4128-9490-0378b6fb0ffe" variableName="httpStatus"/>
+			<set-variable value="Upstream service unable to fulfil the request" doc:name="Set Error Message" doc:id="00cd7abc-68dc-461f-b690-df6456dc040f" variableName="errorMessage"/>
+			<set-variable value="#[error.errorDescription]" doc:name="Set Exception Message" doc:id="a3ea9982-5199-4e9a-a53e-494a5bb189e5" variableName="exceptionMessage"/>
+			<ee:transform doc:name="Transform Message" doc:id="cfea2e43-9a68-45d9-ad37-093a12342a7d" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+error: 
+	{
+            errorCode: vars.httpStatus,
+            errorMessage: vars.errorMessage,
+            errorDescription: vars.exceptionMessage
+
+            }]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+	</error-handler>
+</mule>
